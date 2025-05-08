@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "TradeEvent",
+  "namespace": "com.stockmarket",
+  "fields": [
+    {"name": "trade_id", "type": "int"},
+    {"name": "buy_order_id", "type": "int"},
+    {"name": "sell_order_id", "type": "int"},
+    {"name": "stock_symbol", "type": "string"},
+    {"name": "quantity", "type": "int"},
+    {"name": "price", "type": "double"},
+    {"name": "timestamp", "type": "string"}
+  ]
+}
