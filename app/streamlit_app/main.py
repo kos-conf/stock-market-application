@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 import pandas as pd
 import time
 
-API_BASE = "http://localhost:8000"
+API_BASE = "http://localhost:8001"
 
 # --- Price History Chart Function ---
 def plot_price_history(history):
