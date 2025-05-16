@@ -23,8 +23,12 @@ A real-time stock market monitoring application built with FastAPI backend and S
 ## 📋 Prerequisites
 
 - Python 3.8+
-- Confluent Cloud Account
 - pip (Python package manager)
+- A Confluent Cloud account. 
+[Sign up](https://www.confluent.io/confluent-cloud/tryfree) for a free trial if you don't already have one.
+* The Confluent CLI. 
+Refer to the installation instructions [here](https://docs.confluent.io/confluent-cli/current/install.html).
+- The Confluent CLI. Refer to the installation instructions here.
 
 
 ## Setting up Confluent Cloud Components
@@ -46,6 +50,7 @@ A real-time stock market monitoring application built with FastAPI backend and S
     --region us-east-2 \
     --output-format stdout
 ```
+The output of this command will contain Kafka and Schema Registry API connection properties that we will use in the next section. Please make sure you copy and keep in your notes.
 
 
 2. **Now, create a Flink compute pool in the Confluent Cloud Console by navigating to the [Environments page](https://confluent.cloud/environments), selecting the `stock-market-application` environment, and then clicking the `Flink` tab in the left sidebar:**
@@ -139,7 +144,8 @@ A real-time stock market monitoring application built with FastAPI backend and S
 4. **Activate the virtual environment**
     ```bash
     source venv/bin/activate # For Mac Users
-
+    ```
+    ```shell
     .\Scripts\bin\activate.bat # For Windows Users
     ```
 5. **Install dependencies**
@@ -164,7 +170,7 @@ A real-time stock market monitoring application built with FastAPI backend and S
 
 ## 🚀 Running the Application
 
-1. **Start the FastAPI backend**
+1. **Start the FastAPI backend from the parent folder of the application**
     ```bash
     uvicorn app.fastapi_app.main:app --reload --port 8001
     ```
@@ -206,23 +212,28 @@ A real-time stock market monitoring application built with FastAPI backend and S
       {"symbol":"AAPL","name":"Apple US Inc","price":144.0,"id":1}
     ```
 
-3. **Start the Streamlit frontend in the new terminal**
+3. **Start the Streamlit frontend in the new terminal by activating the virtual environment**
+   ```bash
+   source venv/bin/activate
+   ```
    ```bash
    streamlit run app/streamlit_app/main.py
    ```
 
-4. **Access the application**
+5. **Access the application**
    - Frontend Dashboard: http://localhost:8501
 
-5. **Start simulating the buy operation by clicking buy button 5 to 6 times in interval of 1 seconds each**
+6. **Start simulating the buy operation by clicking buy button 5 to 6 times in interval of 1 seconds each**
 
-6. **You will notice the update in stock price by 10% and the graph will go up**
+7. **You will notice the update in stock price by 10% and the graph will go up**
 
-7. **Simulate stock buy/sell operations by clicking buy and sell buttons randomly for 10 seconds with 1 second interval each**
+8. **Simulate stock buy/sell operations by clicking buy and sell buttons randomly for 10 seconds with 1 second interval each**
 
 ## Tear down infrastructure
 
 Once you are done exploring, don't forget to tear down the MongoDB Atlas and Confluent Cloud resources created for this demo.
+
+**First stop all the Flink statements in SQL Workspace before we execute the next steps (!Important)**
 
 On the Confluent Cloud side, since you created all resources in an environment, you can simply delete the environment and then all resources created for this demo will be deleted (i.e., the Kafka cluster, connector, Flink compute pool, and associated API keys). 
 
