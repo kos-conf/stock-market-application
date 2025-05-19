@@ -44,7 +44,7 @@ Refer to the installation instructions [here](https://docs.confluent.io/confluen
   For example, to use AWS region `us-east-2`:
 
 ```shell
-  confluent cloud-kickstart --name agentic-rag \
+  confluent cloud-kickstart --name stock-app \
     --env stock-market-application \
     --cloud aws \
     --region us-east-2 \
@@ -159,7 +159,7 @@ The output of this command will contain Kafka and Schema Registry API connection
     DATABASE_URL=sqlite:///./stock_market.db
 
     # Kafka
-    KAFKA_BOOTSTRAP_SERVERS=pkc-xxxxx.xxxxxx.xxx.confluent.cloud:9092   # Paste Kafka API Key
+    KAFKA_BOOTSTRAP_SERVERS=pkc-xxxxx.xxxxxx.xxx.confluent.cloud:9092   # Paste Bootstrap server endpoint
     KAFKA_ORDERS_TOPIC=orders
     KAFKA_STOCK_PRICE_TOPIC=stock_prices
     KAFKA_CONSUMER_GROUP=order_processor_group
@@ -229,9 +229,14 @@ The output of this command will contain Kafka and Schema Registry API connection
 
 8. **Simulate stock buy/sell operations by clicking buy and sell buttons randomly for 10 seconds with 1 second interval each**
 
+## Troubleshooting
+
+1. If you do not see the graph changing, check for data in `stock_prices` topic. Until you have data in `stock_prices` topic you can't see the graph being updated.
+2. Avoid running `confluent cloud-kickstart` command multiple times, this will lead to creation of multiple environments. If you're encounter an error with either API keys limit reached or other, just try to delete the existing created environment and retry the command
+
 ## Tear down infrastructure
 
-Once you are done exploring, don't forget to tear down the MongoDB Atlas and Confluent Cloud resources created for this demo.
+Once you are done exploring, don't forget to tear down the Confluent Cloud resources created for this demo.
 
 **First stop all the Flink statements in SQL Workspace before we execute the next steps (!Important)**
 
