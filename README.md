@@ -28,7 +28,6 @@ A real-time stock market monitoring application built with FastAPI backend and S
 [Sign up](https://www.confluent.io/confluent-cloud/tryfree) for a free trial if you don't already have one.
 * The Confluent CLI. 
 Refer to the installation instructions [here](https://docs.confluent.io/confluent-cli/current/install.html).
-- The Confluent CLI. Refer to the installation instructions here.
 
 
 ## Setting up Confluent Cloud Components
@@ -80,7 +79,7 @@ The output of this command will contain Kafka and Schema Registry API connection
       quantity BIGINT,
       created_at STRING,
       ts AS TO_TIMESTAMP(created_at, 'yyyy-mm-dd hh:mm:ss'),
-      WATERMARK FOR ts AS ts - INTERVAL '5' SECOND
+      WATERMARK FOR ts AS ts - INTERVAL '1' SECOND
   ) WITH (
     'value.format'='json-registry'
   );
